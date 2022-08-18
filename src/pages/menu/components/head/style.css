@@ -1,0 +1,12 @@
+@media screen and (max-width: 960px) {
+    .p-menubar .p-menubar-button {
+        display: flex;
+        width: 25rem;
+        height: 2.5rem;
+        color: rgba(0, 0, 0, 0.6);
+        border-radius: 50%;
+        transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+        justify-content: flex-end;
+        float: right;
+    }
+}

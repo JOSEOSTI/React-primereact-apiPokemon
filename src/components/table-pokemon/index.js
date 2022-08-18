@@ -5,11 +5,13 @@ import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { PokemonApiServices } from '../../services/pokemon.services';
 import { InputText } from 'primereact/inputtext';
-import './DataTableDemo.css';
+import './styles.css';
+import { Link } from 'react-router-dom';
 
 const TablePokemon = () => {
     const [pokemons, setPokemons] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [idpokemon, setidPokemon] = useState('');
     const [globalFilterValue, setGlobalFilterValue] = useState('');
     const [selectedPokemons, setSelectedPokemons] = useState(null);
     const [filters, setFilters] = useState({
@@ -50,6 +52,7 @@ const TablePokemon = () => {
         setFilters(_filters);
         setGlobalFilterValue(value);
     }
+
     const renderHeader = () => {
         return (
             <div className="flex justify-content-between align-items-center">
@@ -61,6 +64,7 @@ const TablePokemon = () => {
             </div>
         )
     }
+
     const representativeBodyTemplate = (rowData) => {
         const representative = rowData.sprites.front_default;
         return (
@@ -70,24 +74,32 @@ const TablePokemon = () => {
             </React.Fragment>
         );
     }
-    const actionBodyTemplate = () => {
-        return <Button type="button" icon="pi pi-cog"></Button>;
+
+    const cellEditor = (options) => {
+        if (options) {
+            return <Link to={`pokemon/detail/${options.id}`} >
+                <Button type="button" icon="pi pi-eye">
+                </Button>
+            </Link>;
+        }
     }
+
     const header = renderHeader();
+
     return (
         <div className="datatable-doc-demo">
             <div className="card">
                 <DataTable value={pokemons} paginator className="p-datatable-customers" header={header} rows={10}
-                 paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" rowsPerPageOptions={[10,25,50]}
-                 dataKey="id" rowHover selection={selectedPokemons} onSelectionChange={e => setSelectedPokemons(e.value)}
-                 filters={filters} filterDisplay="menu" loading={loading} responsiveLayout="scroll"
-                 globalFilterFields={['name', 'country.name', 'representative.name', 'balance', 'status']} emptyMessage="No customers found."
-                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" rowsPerPageOptions={[10, 25, 50]}
+                    dataKey="id" rowHover selection={selectedPokemons} onSelectionChange={e => setSelectedPokemons(e.value)}
+                    filters={filters} filterDisplay="menu" loading={loading} responsiveLayout="scroll"
+                    globalFilterFields={['name', 'country.name', 'representative.name', 'balance', 'status']} emptyMessage="No customers found."
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
                     <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
                     <Column field="id" header="Code"></Column>
-                    <Column field="name" header="Name" style={{ minWidth: '14rem' }}  sortable filter filterPlaceholder="Search by name"></Column>
+                    <Column field="name" header="Name" style={{ minWidth: '14rem' }} sortable filter filterPlaceholder="Search by name"></Column>
                     <Column header="Image" body={representativeBodyTemplate}></Column>
-                    <Column headerStyle={{ width: '4rem', textAlign: 'center' }} bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={actionBodyTemplate} />
+                    <Column headerStyle={{ width: '4rem', textAlign: 'center' }} editor={(options) => cellEditor(options.rowData.id)} bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={(options) => cellEditor(options)} />
                 </DataTable>
             </div>
         </div>

@@ -1,0 +1,12 @@
+.table-pokemon {
+ padding: 15px;
+ margin-left: 20rem;
+    width: 50%;
+}
+@media screen and (max-width: 960px) {
+    .table-pokemon {
+        padding: 15px;
+        margin-left: 0rem;
+           width: auto;
+       }
+}

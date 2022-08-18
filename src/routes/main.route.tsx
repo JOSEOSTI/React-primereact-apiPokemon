@@ -4,6 +4,7 @@ import {
     Route,
     HashRouter
   } from "react-router-dom";
+import DetailPokemon from '../components/detail-pokemon';
 import Home from '../pages/home';
 
 const App = () => {
@@ -11,6 +12,7 @@ const App = () => {
     <HashRouter>
         <Routes>
             <Route path='/' element={<Home/>} />
+            <Route path='/pokemon/detail/:id' element={<DetailPokemon />} />
         </Routes>
     </HashRouter>
   )

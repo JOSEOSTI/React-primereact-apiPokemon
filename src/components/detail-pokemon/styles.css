@@ -1,0 +1,25 @@
+.card-body{
+    background-color: #2C3E50 ;
+
+}
+.card-detail {
+    width: 25rem;
+    text-align: center;
+    margin-left: 30rem;
+    padding: 15px;
+}
+
+.p-card-header img {
+    width: 1%;
+    object-fit: cover;
+    height: 15%;
+}
+
+@media screen and (max-width: 960px) {
+    .card-detail {
+        width: 25rem;
+        text-align: center;
+        margin-left:0rem;
+        padding: 0px;
+    }
+}

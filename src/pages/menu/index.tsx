@@ -5,7 +5,7 @@ const Menu
  = () => {
   return (
     <div>
-        <Navpokemon></Navpokemon>
+        <Navpokemon/>
     </div>
   )
 }

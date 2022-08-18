@@ -17,6 +17,10 @@ export class PokemonApi  extends HttpApiService{
         const response = this.get(url);
         return response 
     }
+    getPokemonById = (id:any )=>{
+        const response = this.get(`${PROPERTIES_ENDPOINT }/${id}`);   
+        return response 
+    }
 
 }
 export const PokemonApiServices =  new PokemonApi();
